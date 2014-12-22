@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd" >
+	<bean id="personService" class="cn.itcast.service.impl.PersonServiceBean" lazy-init="false" init-method="init" destroy-method="destroy">
+		<property name="personDao" ref="personDao"></property>
+		<property name="name" value="gg"/>
+		<property name="id" value="11"/>
+	</bean>
+	<bean id="personService2" class="cn.itcast.service.impl.PersonServiceBeanFactory"
+	 factory-method="createPersonServiceBean"/>
+	 
+	<bean id="personServiceFactory" class="cn.itcast.service.impl.PersonServiceBeanFactory"/>
+	<bean id="personService3" factory-bean="personServiceFactory" factory-method="createPersonServiceBean2"/>
+	<bean id="personDao" class="cn.itcast.dao.impl.PersonDaoBean"/>
+	
+</beans>
